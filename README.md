@@ -1,0 +1,2 @@
+# JLVideoPlayer
+一个基于AVFoundation库的视频播放器
