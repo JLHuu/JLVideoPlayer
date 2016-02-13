@@ -1,2 +1,2 @@
 # JLVideoPlayer
-一个基于AVFoundation库的视频播放器
+一个基于AVFoundation库的视频播放器.提供了全屏播放和一些主流功能
