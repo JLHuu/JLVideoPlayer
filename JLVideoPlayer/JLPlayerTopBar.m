@@ -51,14 +51,14 @@
     UIFont *def_font = [UIFont systemFontOfSize:Font_Size];
     _backbtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     _backbtn.frame = CGRectMake(0, 0, Btn_Wifth, frame.size.height);
-    _backbtn.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    _backbtn.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
     [_backbtn setTitle:@"返回" forState:UIControlStateNormal];
     [_backbtn.titleLabel setFont:def_font];
     [_backbtn addTarget:self action:@selector(_backbtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_backbtn];
     _sharbtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     _sharbtn.frame = CGRectMake(frame.size.width - Btn_Wifth, 0, Btn_Wifth, frame.size.height);
-    _sharbtn.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    _sharbtn.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     [_sharbtn setTitle:@"分享" forState:UIControlStateNormal];
     [_sharbtn.titleLabel setFont:def_font];
     [_sharbtn addTarget:self action:@selector(_sharebtnClick:) forControlEvents:UIControlEventTouchUpInside];

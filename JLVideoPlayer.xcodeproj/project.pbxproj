@@ -16,11 +16,11 @@
 		F203C7F81C65C80500A667C6 /* JLVideoPlayerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F203C7F71C65C80500A667C6 /* JLVideoPlayerTests.m */; };
 		F203C8031C65C80500A667C6 /* JLVideoPlayerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F203C8021C65C80500A667C6 /* JLVideoPlayerUITests.m */; };
 		F203C8121C65C8D200A667C6 /* JLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F203C8111C65C8D200A667C6 /* JLPlayerView.m */; };
-		F24771801C672383006D4C57 /* YY.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F247717F1C672383006D4C57 /* YY.mp4 */; };
+		F23C7CBA1C6F3FF000AAEC23 /* JLVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = F23C7CB91C6F3FF000AAEC23 /* JLVideoController.m */; };
 		F247718E1C67504F006D4C57 /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F24771821C67504F006D4C57 /* close@2x.png */; };
 		F247718F1C67504F006D4C57 /* close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F24771831C67504F006D4C57 /* close@3x.png */; };
-		F24771901C67504F006D4C57 /* dot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F24771841C67504F006D4C57 /* dot@2x.png */; };
-		F24771911C67504F006D4C57 /* dot@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F24771851C67504F006D4C57 /* dot@3x.png */; };
+		F24771901C67504F006D4C57 /* thumbimg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F24771841C67504F006D4C57 /* thumbimg@2x.png */; };
+		F24771911C67504F006D4C57 /* thumbimg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F24771851C67504F006D4C57 /* thumbimg@3x.png */; };
 		F24771921C67504F006D4C57 /* fullscreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F24771861C67504F006D4C57 /* fullscreen@2x.png */; };
 		F24771931C67504F006D4C57 /* fullscreen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F24771871C67504F006D4C57 /* fullscreen@3x.png */; };
 		F24771941C67504F006D4C57 /* nonfullscreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F24771881C67504F006D4C57 /* nonfullscreen@2x.png */; };
@@ -29,6 +29,8 @@
 		F24771971C67504F006D4C57 /* pause@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F247718B1C67504F006D4C57 /* pause@3x.png */; };
 		F24771981C67504F006D4C57 /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F247718C1C67504F006D4C57 /* play@2x.png */; };
 		F24771991C67504F006D4C57 /* play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F247718D1C67504F006D4C57 /* play@3x.png */; };
+		F2C4505E1C6F6F7800B9FA4F /* thumbimg_H@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2C4505C1C6F6F7800B9FA4F /* thumbimg_H@2x.png */; };
+		F2C4505F1C6F6F7800B9FA4F /* thumbimg_H@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2C4505D1C6F6F7800B9FA4F /* thumbimg_H@3x.png */; };
 		F2F767DA1C65F0AE0034C7D6 /* JLPlayerBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F767D91C65F0AE0034C7D6 /* JLPlayerBottomBar.m */; };
 		F2F767DD1C65F0C10034C7D6 /* JLPlayerTopBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F767DC1C65F0C10034C7D6 /* JLPlayerTopBar.m */; };
 /* End PBXBuildFile section */
@@ -69,11 +71,12 @@
 		F203C8041C65C80500A667C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F203C8101C65C8D200A667C6 /* JLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLPlayerView.h; sourceTree = "<group>"; };
 		F203C8111C65C8D200A667C6 /* JLPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLPlayerView.m; sourceTree = "<group>"; };
-		F247717F1C672383006D4C57 /* YY.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = YY.mp4; sourceTree = "<group>"; };
+		F23C7CB81C6F3FF000AAEC23 /* JLVideoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLVideoController.h; sourceTree = "<group>"; };
+		F23C7CB91C6F3FF000AAEC23 /* JLVideoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLVideoController.m; sourceTree = "<group>"; };
 		F24771821C67504F006D4C57 /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
 		F24771831C67504F006D4C57 /* close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@3x.png"; sourceTree = "<group>"; };
-		F24771841C67504F006D4C57 /* dot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dot@2x.png"; sourceTree = "<group>"; };
-		F24771851C67504F006D4C57 /* dot@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dot@3x.png"; sourceTree = "<group>"; };
+		F24771841C67504F006D4C57 /* thumbimg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbimg@2x.png"; sourceTree = "<group>"; };
+		F24771851C67504F006D4C57 /* thumbimg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbimg@3x.png"; sourceTree = "<group>"; };
 		F24771861C67504F006D4C57 /* fullscreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fullscreen@2x.png"; sourceTree = "<group>"; };
 		F24771871C67504F006D4C57 /* fullscreen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fullscreen@3x.png"; sourceTree = "<group>"; };
 		F24771881C67504F006D4C57 /* nonfullscreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nonfullscreen@2x.png"; sourceTree = "<group>"; };
@@ -82,6 +85,8 @@
 		F247718B1C67504F006D4C57 /* pause@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause@3x.png"; sourceTree = "<group>"; };
 		F247718C1C67504F006D4C57 /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
 		F247718D1C67504F006D4C57 /* play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@3x.png"; sourceTree = "<group>"; };
+		F2C4505C1C6F6F7800B9FA4F /* thumbimg_H@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbimg_H@2x.png"; sourceTree = "<group>"; };
+		F2C4505D1C6F6F7800B9FA4F /* thumbimg_H@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbimg_H@3x.png"; sourceTree = "<group>"; };
 		F2F767D81C65F0AE0034C7D6 /* JLPlayerBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLPlayerBottomBar.h; sourceTree = "<group>"; };
 		F2F767D91C65F0AE0034C7D6 /* JLPlayerBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLPlayerBottomBar.m; sourceTree = "<group>"; };
 		F2F767DB1C65F0C10034C7D6 /* JLPlayerTopBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLPlayerTopBar.h; sourceTree = "<group>"; };
@@ -137,7 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				F24771811C675043006D4C57 /* IMGs */,
-				F247717F1C672383006D4C57 /* YY.mp4 */,
 				F203C7E01C65C80500A667C6 /* AppDelegate.h */,
 				F203C7E11C65C80500A667C6 /* AppDelegate.m */,
 				F203C7E31C65C80500A667C6 /* ViewController.h */,
@@ -148,6 +152,8 @@
 				F2F767D91C65F0AE0034C7D6 /* JLPlayerBottomBar.m */,
 				F2F767DB1C65F0C10034C7D6 /* JLPlayerTopBar.h */,
 				F2F767DC1C65F0C10034C7D6 /* JLPlayerTopBar.m */,
+				F23C7CB81C6F3FF000AAEC23 /* JLVideoController.h */,
+				F23C7CB91C6F3FF000AAEC23 /* JLVideoController.m */,
 				F203C7E61C65C80500A667C6 /* Main.storyboard */,
 				F203C7E91C65C80500A667C6 /* Assets.xcassets */,
 				F203C7EB1C65C80500A667C6 /* LaunchScreen.storyboard */,
@@ -188,8 +194,10 @@
 			children = (
 				F24771821C67504F006D4C57 /* close@2x.png */,
 				F24771831C67504F006D4C57 /* close@3x.png */,
-				F24771841C67504F006D4C57 /* dot@2x.png */,
-				F24771851C67504F006D4C57 /* dot@3x.png */,
+				F24771841C67504F006D4C57 /* thumbimg@2x.png */,
+				F24771851C67504F006D4C57 /* thumbimg@3x.png */,
+				F2C4505C1C6F6F7800B9FA4F /* thumbimg_H@2x.png */,
+				F2C4505D1C6F6F7800B9FA4F /* thumbimg_H@3x.png */,
 				F24771861C67504F006D4C57 /* fullscreen@2x.png */,
 				F24771871C67504F006D4C57 /* fullscreen@3x.png */,
 				F24771881C67504F006D4C57 /* nonfullscreen@2x.png */,
@@ -317,13 +325,14 @@
 				F24771981C67504F006D4C57 /* play@2x.png in Resources */,
 				F203C7EA1C65C80500A667C6 /* Assets.xcassets in Resources */,
 				F203C7E81C65C80500A667C6 /* Main.storyboard in Resources */,
-				F24771901C67504F006D4C57 /* dot@2x.png in Resources */,
+				F24771901C67504F006D4C57 /* thumbimg@2x.png in Resources */,
 				F24771961C67504F006D4C57 /* pause@2x.png in Resources */,
+				F2C4505F1C6F6F7800B9FA4F /* thumbimg_H@3x.png in Resources */,
 				F24771931C67504F006D4C57 /* fullscreen@3x.png in Resources */,
 				F24771951C67504F006D4C57 /* nonfullscreen@3x.png in Resources */,
-				F24771801C672383006D4C57 /* YY.mp4 in Resources */,
 				F24771921C67504F006D4C57 /* fullscreen@2x.png in Resources */,
-				F24771911C67504F006D4C57 /* dot@3x.png in Resources */,
+				F24771911C67504F006D4C57 /* thumbimg@3x.png in Resources */,
+				F2C4505E1C6F6F7800B9FA4F /* thumbimg_H@2x.png in Resources */,
 				F24771991C67504F006D4C57 /* play@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -349,6 +358,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F23C7CBA1C6F3FF000AAEC23 /* JLVideoController.m in Sources */,
 				F203C7E51C65C80500A667C6 /* ViewController.m in Sources */,
 				F2F767DA1C65F0AE0034C7D6 /* JLPlayerBottomBar.m in Sources */,
 				F203C7E21C65C80500A667C6 /* AppDelegate.m in Sources */,

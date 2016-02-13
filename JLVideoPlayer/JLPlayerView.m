@@ -5,7 +5,7 @@
 //  Created by hujiele on 16/2/6.
 //  Copyright © 2016年 JLHuu. All rights reserved.
 //
-#define Touch_Range 30.f
+#define Touch_Range (self.frame.size.height/12.f)
 
 #import "JLPlayerView.h"
 #import <MediaPlayer/MediaPlayer.h>
@@ -27,6 +27,9 @@
     CGFloat _starY;// 手指触摸开始点Y
     BOOL _isplaying; // 播放状态
     UITapGestureRecognizer *_tap;// 单击事件
+    CGFloat _VolumeValue;// 生音值
+    CGFloat _Bright;// 亮度值
+    BOOL _leftPoint;// 触摸点位置
 }
 // 改变view底层layer,影片播放layer
 +(Class)layerClass
@@ -37,6 +40,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         [self initUIWith:frame];
+        [self addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
     }
     return self;
 }
@@ -45,11 +49,13 @@
     [self setBackgroundColor:[UIColor blackColor]];
     _topbar = [[JLPlayerTopBar alloc] initTopBarWithFrame:CGRectMake(0, 0, frame.size.width, TopBar_Height)];
     _topbar.delegate = self;
+    _topbar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self addSubview:_topbar];
     _bottombar = [[JLPlayerBottomBar alloc] initBottomBarWithFrame:CGRectMake(0, frame.size.height - BottomBar_Height, frame.size.width, BottomBar_Height)];
+    _bottombar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _bottombar.delegate = self;
     [self addSubview:_bottombar];
-    self.cantouchchange = YES;
+    self.TouchControl = YES;
     self.showBottombar = YES;
     self.showTopbar = YES;
     _tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_OnTap:)];
@@ -57,6 +63,7 @@
     [self addGestureRecognizer:_tap];
     
 }
+
 -(AVPlayerLayer *)playerlayer
 {
     return (AVPlayerLayer *)[self layer];
@@ -138,8 +145,8 @@
 -(void)play
 {
     if (self.player) {
-            // kvo
         [self.player play];
+        NSLog(@"_playeritemerror:%@",_playeritem.error);
         _isplaying = YES;
         [[NSNotificationCenter defaultCenter] postNotificationName:StutasNotifacation object:nil userInfo:@{@"playstutas":@YES,@"fullstutas":@YES}];
         }
@@ -185,6 +192,7 @@
 -(void)RemoveAllObserveAndNoTi
 {
     [self.playeritem removeObserver:self forKeyPath:@"status"];
+    [self removeObserver:self forKeyPath:@"frame"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 #pragma mark - KVO
@@ -193,6 +201,10 @@
     if ([keyPath isEqualToString:@"status"]) {
         if (AVPlayerItemStatusReadyToPlay == _player.currentItem.status){            [_bottombar.timelable_r setText:[self _TimetoStringWith:self.totaltime]];
             }
+    }
+    if ([keyPath isEqualToString:@"frame"]) {
+        [_topbar setFrame:CGRectMake(0, 0, self.frame.size.width, TopBar_Height)];
+        [_bottombar setFrame:CGRectMake(0, self.frame.size.height - BottomBar_Height, self.frame.size.width, BottomBar_Height)];
     }
 }
 - (NSString *)_TimetoStringWith:(CGFloat)time
@@ -276,48 +288,65 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
-    if (!_cantouchchange) {
+    if (!_TouchControl) {
         return;
     }
+    UISlider *VolumeSlider = nil;
+    for (UIControl *subview in [self.volumeview subviews]) {
+        if ([subview isKindOfClass:[UISlider class]]) {
+            VolumeSlider = (UISlider *)subview;
+        }
+    }
+    _VolumeValue = VolumeSlider.value;
+    _Bright = [UIScreen mainScreen].brightness;
     UITouch *touch = [touches anyObject];
     CGPoint starPoint = [touch locationInView:self];
     _starX = starPoint.x;
     _starY = starPoint.y;
+    _leftPoint = _starX < self.frame.size.width/2 ? YES : NO;
 }
 
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [super touchesMoved:touches withEvent:event];
-    if (!_cantouchchange) {
+    if (!_TouchControl) {
         return;
     }
     UITouch *touch = [touches anyObject];
     CGPoint endpoint = [touch locationInView:self];
     CGFloat _endY = endpoint.y;
     // 左边为亮度调节，右边为声音调节
-    BOOL _leftPoint;
-    _leftPoint = _starX < self.frame.size.width/2 ? YES : NO;
     if (_leftPoint) {
-        UISlider *VolumeSlider = nil;
-        for (UIControl *subview in [self.volumeview subviews]) {
-            if ([subview isKindOfClass:[UISlider class]]) {
-                VolumeSlider = (UISlider *)subview;
-            }
-        }
-        CGFloat currentValue = VolumeSlider.value;
         if (_endY - _starY > Touch_Range || _endY - _starY < -Touch_Range) {// 声音变化
-            currentValue -= (_endY-_starY > Touch_Range ? (_endY-_starY-Touch_Range):(_endY-_starY+Touch_Range))/(self.frame.size.height*.75);
-            currentValue = currentValue < 0 ? 0 : currentValue;
-            currentValue = currentValue > 1 ? 1 : currentValue;
-            [VolumeSlider setValue:currentValue animated:YES];
+            if (_endY - _starY > Touch_Range) {
+                _VolumeValue -= 0.1;
+
+            }else{
+                _VolumeValue += 0.1;
+
+            }
+            UISlider *VolumeSlider = nil;
+            for (UIControl *subview in [self.volumeview subviews]) {
+                if ([subview isKindOfClass:[UISlider class]]) {
+                    VolumeSlider = (UISlider *)subview;
+                }
+            }
+           _VolumeValue = _VolumeValue > 1 ? 1:_VolumeValue;
+           _VolumeValue = _VolumeValue < 0 ? 0:_VolumeValue;
+            [VolumeSlider setValue:_VolumeValue animated:YES];
+            _starY = _endY;
         }
     }else{
-        CGFloat bright = [UIScreen mainScreen].brightness;
         if (_endY - _starY > Touch_Range || _endY - _starY < -Touch_Range) {// 亮度变化
-            bright -= (_endY-_starY > Touch_Range ? (_endY-_starY-Touch_Range):(_endY-_starY+Touch_Range))/(self.frame.size.height *.75);
-            bright = bright < 0 ? 0 : bright;
-            bright = bright > 1 ? 1 : bright;
-            [[UIScreen mainScreen] setBrightness:bright];
+            if (_endY - _starY > Touch_Range) {
+                _Bright -= 0.1;
+            }else{
+                _Bright += 0.1;
+            }
+            _Bright = _Bright < 0 ? 0 : _Bright;
+            _Bright = _Bright > 1 ? 1 : _Bright;
+            [[UIScreen mainScreen] setBrightness:_Bright];
+            _starY = _endY;
         }
     }
 }
@@ -325,7 +354,7 @@
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
-    if (!_cantouchchange) {
+    if (!_TouchControl) {
         return;
     }
     UITouch *touch = [touches anyObject];

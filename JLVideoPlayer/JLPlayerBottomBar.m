@@ -36,8 +36,10 @@
 }
 - (void)initUIWithFrame:(CGRect)frame
 {
-    _playslider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, frame.size.width*0.5, 10)];
+    _playslider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, frame.size.width*0.5, 20)];
     _playslider.center = CGPointMake(self.bounds.size.width /2.f, self.bounds.size.height/2.f);
+    [_playslider setThumbImage:[UIImage imageNamed:@"thumbimg"] forState:UIControlStateNormal];
+    [_playslider setThumbImage:[UIImage imageNamed:@"thumbimg_H"] forState:UIControlStateHighlighted];
     _playslider.minimumValue = 0.f;
     _playslider.maximumValue = 1.f;
     _playslider.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -49,8 +51,8 @@
     _Play_PauseBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     _Play_PauseBtn.tintColor = [UIColor whiteColor];
     _Play_PauseBtn.frame = CGRectMake(0, 0, .1*frame.size.width,.1*frame.size.width);
-    _Play_PauseBtn.center = CGPointMake(0.1*frame.size.width, frame.size.height/2.f);
-    _Play_PauseBtn.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    _Play_PauseBtn.center = CGPointMake(0.1*frame.size.width, self.bounds.size.height/2.f);
+    _Play_PauseBtn.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
     [_Play_PauseBtn setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
     [self addSubview:_Play_PauseBtn];
     [_Play_PauseBtn addTarget:self action:@selector(_PlAyDidSelect:) forControlEvents:UIControlEventTouchUpInside];
@@ -58,8 +60,8 @@
     _fullScreenBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     _fullScreenBtn.tintColor = [UIColor whiteColor];
     _fullScreenBtn.frame = CGRectMake(0, 0, 0.1*frame.size.width,.1*frame.size.width);
-    _fullScreenBtn.center = CGPointMake(0.9*frame.size.width, frame.size.height/2.f);
-    _fullScreenBtn.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    _fullScreenBtn.center = CGPointMake(0.9*frame.size.width, self.bounds.size.height/2.f);
+    _fullScreenBtn.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     [_fullScreenBtn setImage:[UIImage imageNamed:@"fullscreen"] forState:UIControlStateNormal];
     [self addSubview:_fullScreenBtn];
     [_fullScreenBtn addTarget:self action:@selector(_FullScreenDidSelect:) forControlEvents:UIControlEventTouchUpInside];
@@ -68,6 +70,7 @@
     _timelable_l = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0.1*frame.size.width, Font_Size+5)];
     _timelable_l.center = CGPointMake(0.2*frame.size.width, _playslider.center.y);
     _timelable_l.backgroundColor = [UIColor clearColor];
+    _timelable_l.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
     _timelable_l.font = d_font;
     _timelable_l.textColor = [UIColor whiteColor];
     _timelable_l.text = @"00:00";
@@ -75,6 +78,7 @@
     [self addSubview:_timelable_l];
     _timelable_r = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0.1*frame.size.width, Font_Size+5)];
     _timelable_r.center = CGPointMake(0.8*frame.size.width, _playslider.center.y);
+    _timelable_r.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     _timelable_r.backgroundColor = [UIColor clearColor];
     _timelable_r.font = d_font;
     _timelable_r.textColor = [UIColor whiteColor];

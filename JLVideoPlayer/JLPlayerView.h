@@ -35,7 +35,7 @@ typedef NS_ENUM(NSInteger,PlayerVideoMode){
 // 视频填充类型,defaulet= PlayerVideoModeAspect;
 @property (nonatomic,assign)PlayerVideoMode VideoMode;
 // 是否可以触摸view改变声音和亮度，默认为YES
-@property (nonatomic,assign)BOOL cantouchchange;
+@property (nonatomic,assign)BOOL TouchControl;
 // default yes
 @property (nonatomic,assign)BOOL showTopbar;
 @property (nonatomic,assign)BOOL showBottombar;
