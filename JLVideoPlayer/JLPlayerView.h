@@ -11,19 +11,32 @@
 #define BottomBar_Height 64.f
 #define TopBar_Height 44.f
 typedef NS_ENUM(NSInteger,PlayerVideoMode){
+    /**
+     原始比例
+     */
     PlayerVideoModeAspect = 0,
+    /**
+     填充
+     */
     PlayerVideoModeAspectfill,
+    /**
+     比例填充
+     */
     PlayerVideoModeResize,
+};
+typedef NS_ENUM(NSInteger,PlayStatus){
+    PlayStatusStop,// 停止状态
+    PlayStatusPlaying,// 正在播放
+    PlayStatusPause,// 暂停状态
+    PlayStatusError,// 播放错误
 };
 @class JLPlayerView;
 @protocol JLPlayerViewDelegate <NSObject>
 @optional
-// 快进、快退
+//// 快进、快退
 - (void)PlayerView:(JLPlayerView *)player MoviedidRunFaster:(BOOL)faster;
-// 声音大小
-- (void)PlayerView:(JLPlayerView *)player VolumedidLoader:(BOOL)loader;
-// 屏幕亮度
-- (void)PlayerView:(JLPlayerView *)player ScreendidLighter:(BOOL)lighter;
+// 当前播放状态
+- (void)PlayerView:(JLPlayerView *)player CurrentStutas:(PlayStatus)stasus Error:(NSError *)error;
 
 @end
 
@@ -39,7 +52,8 @@ typedef NS_ENUM(NSInteger,PlayerVideoMode){
 // default yes
 @property (nonatomic,assign)BOOL showTopbar;
 @property (nonatomic,assign)BOOL showBottombar;
-
+// 当前播放状态
+@property (nonatomic,assign)PlayStatus currentstutas;
 @property (nonatomic,readonly)CGFloat totaltime;// 总时长
 // 播放
 - (void)play;

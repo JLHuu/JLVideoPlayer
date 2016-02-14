@@ -61,7 +61,7 @@
     _tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_OnTap:)];
     _tap.delegate = self;
     [self addGestureRecognizer:_tap];
-    
+    self.currentstutas = PlayStatusStop;
 }
 
 -(AVPlayerLayer *)playerlayer
@@ -81,6 +81,13 @@
 {
     _showTopbar = showTopbar;
     _topbar.hidden = !_showTopbar;
+}
+-(void)setCurrentstutas:(PlayStatus)currentstutas
+{
+    _currentstutas = currentstutas;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(PlayerView:CurrentStutas:Error:)]) {
+        [self.delegate PlayerView:self CurrentStutas:_currentstutas Error:_player.currentItem.error];
+    }
 }
 -(void)setVideoMode:(PlayerVideoMode)VideoMode
 {
@@ -147,7 +154,13 @@
     if (self.player) {
         [self.player play];
         NSLog(@"_playeritemerror:%@",_playeritem.error);
-        _isplaying = YES;
+        if (_playeritem.error) {
+            _isplaying = NO;
+            self.currentstutas = PlayStatusError;
+            }else{
+                _isplaying = YES;
+                self.currentstutas = PlayStatusPlaying;
+        }
         [[NSNotificationCenter defaultCenter] postNotificationName:StutasNotifacation object:nil userInfo:@{@"playstutas":@YES,@"fullstutas":@YES}];
         }
 }
@@ -156,6 +169,7 @@
     if (self.player) {
         [self.player pause];
         _isplaying = NO;
+        self.currentstutas = PlayStatusPause;
         [[NSNotificationCenter defaultCenter] postNotificationName:StutasNotifacation object:nil userInfo:@{@"playstutas":@NO,@"fullstutas":@YES}];
     }
 }
@@ -163,6 +177,7 @@
 {
     if (self.player) {
         _isplaying = NO;
+        self.currentstutas = PlayStatusStop;
         [self.player seekToTime:CMTimeMake(0, 1) completionHandler:^(BOOL finished) {
             [self.player setRate:0];
             [[NSNotificationCenter defaultCenter] postNotificationName:StutasNotifacation object:nil userInfo:@{@"playstutas":@NO,@"fullstutas":@YES}];
@@ -234,14 +249,20 @@
 // 进入前台
 - (void)applicationWillEnterForeground:(NSNotification *)Noti
 {
-    NSLog(@"进入前台");
+    if (_isplaying) {
+        [self play];
+    }else{
+        [self pause];
+    }
+
 }
 // 进入后台
 - (void)applicationWillResignActive:(NSNotification *)Noti
 {
-    // 暂停播放
     if (_isplaying) {
         [self pause];
+        _isplaying = YES;
+        self.currentstutas = PlayStatusPlaying;
     }
 }
 #pragma mark - delegate
