@@ -8,9 +8,7 @@
 #define Touch_Range (self.frame.size.height/12.f)
 
 #import "JLPlayerView.h"
-#import <MediaPlayer/MediaPlayer.h>
-#import "JLPlayerBottomBar.h"
-#import "JLPlayerTopBar.h"
+
 @interface JLPlayerView()<JlPlayerBottomBarDelegate,JLPlayerTopBarDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic,strong) AVPlayer *player;
 @property (nonatomic,strong)AVPlayerItem *playeritem;
@@ -27,9 +25,11 @@
     CGFloat _starY;// 手指触摸开始点Y
     BOOL _isplaying; // 播放状态
     UITapGestureRecognizer *_tap;// 单击事件
-    CGFloat _VolumeValue;// 生音值
+    CGFloat _VolumeValue;// 声音值
     CGFloat _Bright;// 亮度值
-    BOOL _leftPoint;// 触摸点位置
+    BOOL _leftPoint;// 触摸点位置左、右
+    CGRect _OriginFrame; // 全屏点击前的frame
+    UIView *video_superview;// 原始父视图
 }
 // 改变view底层layer,影片播放layer
 +(Class)layerClass
@@ -201,7 +201,9 @@
     // 程序进入前台的notifation
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:)name:UIApplicationWillEnterForegroundNotification object:nil];
     // 程序进入后台的notifation
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:)name:UIApplicationWillResignActiveNotification object:nil];    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:)name:UIApplicationWillResignActiveNotification object:nil];
+    // 添加屏幕旋转通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_DeviceScreenRotationChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 // 移除所有监听
 -(void)RemoveAllObserveAndNoTi
@@ -265,12 +267,7 @@
         self.currentstutas = PlayStatusPlaying;
     }
 }
-#pragma mark - delegate
--(void)BottomBar:(JLPlayerBottomBar *)bar didSelectedfullScreenBtn:(UIButton *)btn Withfullscreen:(BOOL)isfullscreen
-{
-    NSLog(@"fullscreen%d",isfullscreen);
-}
--(void)BottomBar:(JLPlayerBottomBar *)bar didSelectedplay_pasueBtn:(UIButton *)btn 
+-(void)BottomBar:(JLPlayerBottomBar *)bar didSelectedplay_pasueBtn:(UIButton *)btn
 {
     if (_isplaying) {
         [self pause];
@@ -278,13 +275,75 @@
         [self play];
     }
 }
+#pragma mark - 屏幕旋转通知
+- (void)_DeviceScreenRotationChange:(NSNotification *)Noti
+{
+    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+    UIInterfaceOrientation interfaceOrientation = (UIInterfaceOrientation)orientation;
+    NSLog(@"%ld",(long)orientation);
+//    NSLog(@"%@",Noti.userInfo);
+}
+#pragma mark - fullScreen
+-(void)BottomBar:(JLPlayerBottomBar *)bar didSelectedfullScreenBtn:(UIButton *)btn Withfullscreen:(BOOL)isfullscreen
+{
+    if (isfullscreen) {
+        [self _didSelectfullscreenfinished:^(BOOL finished) {
+            // 发送全屏通知
+        [[NSNotificationCenter defaultCenter] postNotificationName:FullScreenDidSelectedNotifaction object:btn userInfo:@{@"isfullscreen":@(isfullscreen)}];
+        }];
+    }else{
+        [self _didSelectFullScreenOrigin:^(BOOL finsihed) {
+            video_superview = nil;
+           _OriginFrame = CGRectZero;
+        }];
+    }
+}
+// 变为全屏
+- (void)_didSelectfullscreenfinished:(void(^)(BOOL finished)) isfinished
+{
+// 把其添加到window上，设置为全屏
+    // 记录点击全屏前的superview，frame
+    video_superview = self.superview;
+    _OriginFrame = self.frame;
+    [self removeFromSuperview];
+    CGSize size = [UIScreen mainScreen].bounds.size;
+    [UIView animateWithDuration:0.3 animations:^{
+        [[UIApplication sharedApplication].keyWindow addSubview:self];
+        [self setFrame:CGRectMake(0, 0, size.height, size.width)];
+        self.transform = CGAffineTransformMakeRotation(M_PI_2);
+        self.center = CGPointMake(size.width/2.f, size.height/2.f);
+    } completion:^(BOOL finished) {
+        isfinished(finished);
+    }];
+}
+// 变为原样
+-(void)_didSelectFullScreenOrigin:(void (^)(BOOL finsihed)) isfinished
+{
+    if (video_superview !=nil && &_OriginFrame != NULL) {
+        [video_superview bringSubviewToFront:self];
+        [UIView animateWithDuration:0.3 animations:^{
+            self.transform = CGAffineTransformIdentity;
+            [self setFrame:_OriginFrame];
+            [self removeFromSuperview];
+            [video_superview addSubview:self];
+        } completion:^(BOOL finished) {
+            isfinished(finished);
+        }];
+    }
+}
+#pragma mark - Delegate
+
 -(void)TopBar:(JLPlayerTopBar *)topbar didSelectedBackBtn:(UIButton *)backbtn
 {
-    NSLog(@"Backbtn");
+    if (self.delegate && [self.delegate respondsToSelector:@selector(PlayerView:didSelectBackbtn:)]) {
+        [self.delegate PlayerView:self didSelectBackbtn:backbtn];
+    }
 }
 -(void)TopBar:(JLPlayerTopBar *)topbar didSelectedShareBtn:(UIButton *)sharebtn
 {
-    NSLog(@"shareBtn");
+    if (self.delegate && [self.delegate respondsToSelector:@selector(PlayerView:didSelectShareBtn:)]) {
+        [self.delegate PlayerView:self didSelectShareBtn:sharebtn];
+    }
 }
 -(void)BottomBar:(JLPlayerBottomBar *)bar PlaySilder:(UISlider *)slider MoveStutas:(PlaySilderMoveStutas)stutas
 {
@@ -304,6 +363,7 @@
 -(void)dealloc
 {
     [self RemoveAllObserveAndNoTi];
+    [self stopplay];
 }
 #pragma mark - touch
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

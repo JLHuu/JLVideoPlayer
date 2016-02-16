@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MediaPlayer/MediaPlayer.h>
+#import "JLPlayerBottomBar.h"
+#import "JLPlayerTopBar.h"
 #import <AVFoundation/AVFoundation.h>
+
+#define FullScreenDidSelectedNotifaction @"FullScreenDidSelectedNotifaction"
 #define BottomBar_Height 64.f
 #define TopBar_Height 44.f
 typedef NS_ENUM(NSInteger,PlayerVideoMode){
@@ -37,7 +42,10 @@ typedef NS_ENUM(NSInteger,PlayStatus){
 - (void)PlayerView:(JLPlayerView *)player MoviedidRunFaster:(BOOL)faster;
 // 当前播放状态
 - (void)PlayerView:(JLPlayerView *)player CurrentStutas:(PlayStatus)stasus Error:(NSError *)error;
-
+// 点击分享按钮
+- (void)PlayerView:(JLPlayerView *)player didSelectShareBtn:(UIButton *)btn;
+// 点击返回按钮
+- (void)PlayerView:(JLPlayerView *)player didSelectBackbtn:(UIButton *)btn;
 @end
 
 @interface JLPlayerView : UIView

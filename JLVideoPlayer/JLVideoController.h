@@ -10,4 +10,6 @@
 
 @interface JLVideoController : UIViewController
 
+@property (nonatomic,strong)NSURL *viodeourl;
+
 @end
