@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#define IMG_NAME(name) [UIImage imageWithContentsOfFile: [[[NSBundle mainBundle].resourcePath stringByAppendingPathComponent:@"IMG.bundle"] stringByAppendingPathComponent:name]]
+
 #define StutasNotifacation @"StutasNotifacation"
 
 typedef NS_ENUM(NSInteger,PlaySilderMoveStutas){

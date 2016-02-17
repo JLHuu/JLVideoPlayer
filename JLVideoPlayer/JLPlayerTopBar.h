@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "JLPlayerBottomBar.h"
 @class JLPlayerTopBar;
 @protocol JLPlayerTopBarDelegate <NSObject>
 @optional

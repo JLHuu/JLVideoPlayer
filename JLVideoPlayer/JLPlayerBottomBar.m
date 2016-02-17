@@ -8,7 +8,7 @@
 #define Bottom_Bar_alpha 0.8
 #define Font_Size 8.f
 #import "JLPlayerBottomBar.h"
-#import <objc/runtime.h>
+
 @interface JLPlayerBottomBar()
 // 播放进度条
 @property (nonatomic,strong) UISlider *playslider;
@@ -38,8 +38,8 @@
 {
     _playslider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, frame.size.width*0.5, 20)];
     _playslider.center = CGPointMake(self.bounds.size.width /2.f, self.bounds.size.height/2.f);
-    [_playslider setThumbImage:[UIImage imageNamed:@"thumbimg"] forState:UIControlStateNormal];
-    [_playslider setThumbImage:[UIImage imageNamed:@"thumbimg_H"] forState:UIControlStateHighlighted];
+    [_playslider setThumbImage:IMG_NAME(@"thumbimg.png") forState:UIControlStateNormal];
+    [_playslider setThumbImage:IMG_NAME(@"thumbimg_H.png")forState:UIControlStateHighlighted];
     _playslider.minimumValue = 0.f;
     _playslider.maximumValue = 1.f;
     _playslider.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -53,7 +53,7 @@
     _Play_PauseBtn.frame = CGRectMake(0, 0, .1*frame.size.width,.1*frame.size.width);
     _Play_PauseBtn.center = CGPointMake(0.1*frame.size.width, self.bounds.size.height/2.f);
     _Play_PauseBtn.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
-    [_Play_PauseBtn setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+    [_Play_PauseBtn setImage:IMG_NAME(@"play.png")forState:UIControlStateNormal];
     [self addSubview:_Play_PauseBtn];
     [_Play_PauseBtn addTarget:self action:@selector(_PlAyDidSelect:) forControlEvents:UIControlEventTouchUpInside];
     // full screen btn
@@ -62,7 +62,7 @@
     _fullScreenBtn.frame = CGRectMake(0, 0, 0.1*frame.size.width,.1*frame.size.width);
     _fullScreenBtn.center = CGPointMake(0.9*frame.size.width, self.bounds.size.height/2.f);
     _fullScreenBtn.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-    [_fullScreenBtn setImage:[UIImage imageNamed:@"fullscreen"] forState:UIControlStateNormal];
+    [_fullScreenBtn setImage:IMG_NAME(@"fullscreen.png") forState:UIControlStateNormal];
     [self addSubview:_fullScreenBtn];
     [_fullScreenBtn addTarget:self action:@selector(_FullScreenDidSelect:) forControlEvents:UIControlEventTouchUpInside];
     // timelabel
@@ -93,21 +93,20 @@
 {
     NSDictionary *dict = Noti.userInfo;
     BOOL Playbtnstutas = [dict[@"playstutas"] boolValue];
-    [_Play_PauseBtn setImage:[UIImage imageNamed:Playbtnstutas == YES ? @"pause": @"play"] forState:UIControlStateNormal];
+    [_Play_PauseBtn setImage:IMG_NAME(Playbtnstutas == YES ? @"pause.png": @"play.png") forState:UIControlStateNormal];
 }
 #pragma mark - performSEL
 - (void)_FullScreenDidSelect:(UIButton *)btn
 {
     _IsFullScreen = !_IsFullScreen;
     if (_IsFullScreen) {
-        [btn setImage:[UIImage imageNamed:@"nonfullscreen"] forState:UIControlStateNormal];
+        [btn setImage:IMG_NAME(@"nonfullscreen.png") forState:UIControlStateNormal];
     }else{
-        [btn setImage:[UIImage imageNamed:@"fullscreen"] forState:UIControlStateNormal];
+        [btn setImage:IMG_NAME(@"fullscreen.png") forState:UIControlStateNormal];
     }
     if (self.delegate && [self.delegate respondsToSelector:@selector(BottomBar:didSelectedfullScreenBtn:Withfullscreen:)]) {
         [self.delegate BottomBar:self didSelectedfullScreenBtn:btn Withfullscreen:_IsFullScreen];
     }
-
 }
 - (void)_PlAyDidSelect:(UIButton *)btn
 { 

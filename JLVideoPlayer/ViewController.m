@@ -35,28 +35,26 @@
 //    [playview play];
     
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+// 此页禁止旋转屏幕
+- (BOOL)shouldAutorotate
+{
+    return NO;
 }
-
 - (IBAction)OnClick1:(UIButton *)sender {
-    playview.VideoMode = 0;
+    playview.VideoMode = PlayerVideoModeAspect;
 }
 
 - (IBAction)Onclick3:(UIButton *)sender {
-    playview.VideoMode = 1;
+    playview.VideoMode = PlayerVideoModeAspectfill;
 
-}
-
-- (IBAction)Present:(UIButton *)sender {
-    JLVideoController *vc = [[JLVideoController alloc] init];
-
-    [self.navigationController pushViewController:vc animated:YES];
 }
 - (IBAction)Onclick2:(UIButton *)sender {
-    playview.VideoMode = 2;
-
+    playview.VideoMode = PlayerVideoModeResize;
+    
 }
+- (IBAction)Present:(UIButton *)sender {
+    JLVideoController *vc = [[JLVideoController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 @end

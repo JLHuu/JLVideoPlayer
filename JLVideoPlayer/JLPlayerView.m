@@ -153,7 +153,6 @@
 {
     if (self.player) {
         [self.player play];
-        NSLog(@"_playeritemerror:%@",_playeritem.error);
         if (_playeritem.error) {
             _isplaying = NO;
             self.currentstutas = PlayStatusError;
@@ -161,7 +160,7 @@
                 _isplaying = YES;
                 self.currentstutas = PlayStatusPlaying;
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:StutasNotifacation object:nil userInfo:@{@"playstutas":@YES,@"fullstutas":@YES}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:StutasNotifacation object:nil userInfo:@{@"playstutas":@YES}];
         }
 }
 - (void)pause
@@ -170,7 +169,7 @@
         [self.player pause];
         _isplaying = NO;
         self.currentstutas = PlayStatusPause;
-        [[NSNotificationCenter defaultCenter] postNotificationName:StutasNotifacation object:nil userInfo:@{@"playstutas":@NO,@"fullstutas":@YES}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:StutasNotifacation object:nil userInfo:@{@"playstutas":@NO}];
     }
 }
 -(void)stopplay
@@ -180,7 +179,7 @@
         self.currentstutas = PlayStatusStop;
         [self.player seekToTime:CMTimeMake(0, 1) completionHandler:^(BOOL finished) {
             [self.player setRate:0];
-            [[NSNotificationCenter defaultCenter] postNotificationName:StutasNotifacation object:nil userInfo:@{@"playstutas":@NO,@"fullstutas":@YES}];
+            [[NSNotificationCenter defaultCenter] postNotificationName:StutasNotifacation object:nil userInfo:@{@"playstutas":@NO}];
         }];
     }
 }
@@ -202,8 +201,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:)name:UIApplicationWillEnterForegroundNotification object:nil];
     // 程序进入后台的notifation
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:)name:UIApplicationWillResignActiveNotification object:nil];
-    // 添加屏幕旋转通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_DeviceScreenRotationChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 // 移除所有监听
 -(void)RemoveAllObserveAndNoTi
@@ -274,14 +271,6 @@
     }else{
         [self play];
     }
-}
-#pragma mark - 屏幕旋转通知
-- (void)_DeviceScreenRotationChange:(NSNotification *)Noti
-{
-    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-    UIInterfaceOrientation interfaceOrientation = (UIInterfaceOrientation)orientation;
-    NSLog(@"%ld",(long)orientation);
-//    NSLog(@"%@",Noti.userInfo);
 }
 #pragma mark - fullScreen
 -(void)BottomBar:(JLPlayerBottomBar *)bar didSelectedfullScreenBtn:(UIButton *)btn Withfullscreen:(BOOL)isfullscreen
