@@ -131,15 +131,6 @@
     [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:dispatch_get_global_queue(0, 0) usingBlock:^(CMTime time) {
         CMTime currenttime = WE_SELF.player.currentItem.currentTime;
         CGFloat currtime = (CGFloat)currenttime.value/currenttime.timescale;
-//        // 缓冲
-//       NSArray *TimeValues = WE_SELF.player.currentItem.loadedTimeRanges;
-//        NSValue *value = TimeValues[0];
-//        CMTimeRange timerange = [value CMTimeRangeValue] ;
-//        NSString * (^CMTimeBlock) (CMTime a);
-//        CMTimeBlock =  ^(CMTime a){
-//                        return [NSString stringWithFormat:@"%lld",a.value/a.timescale];
-//        };
-//        NSLog(@"____%@,%@",CMTimeBlock(timerange.duration),CMTimeBlock(timerange.start));
         dispatch_async(dispatch_get_main_queue(), ^{
             [slider setValue:currtime/WE_SELF.totaltime animated:YES];
             [WE_SELF.bottombar.timelable_l setText:[WE_SELF _TimetoStringWith:currtime]];
