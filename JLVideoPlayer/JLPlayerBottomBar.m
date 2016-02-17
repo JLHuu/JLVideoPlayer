@@ -12,8 +12,6 @@
 @interface JLPlayerBottomBar()
 // 播放进度条
 @property (nonatomic,strong) UISlider *playslider;
-// 缓冲进度条
-@property (nonatomic,strong) UIProgressView *bufferprogress;
 // 全屏点击按钮
 @property (nonatomic,strong) UIButton *fullScreenBtn;
 // 播放暂定按钮
@@ -36,8 +34,15 @@
 }
 - (void)initUIWithFrame:(CGRect)frame
 {
+    // 进度条
     _playslider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, frame.size.width*0.5, 20)];
     _playslider.center = CGPointMake(self.bounds.size.width /2.f, self.bounds.size.height/2.f);
+    // 画一个透明图
+    UIGraphicsBeginImageContextWithOptions((CGSize){ 1, 1 }, NO, 0.0f);
+    UIImage *trackImage = UIGraphicsGetImageFromCurrentImageContext();
+    [_playslider setMinimumTrackImage:trackImage forState:UIControlStateNormal];
+    [_playslider setMaximumTrackImage:trackImage forState:UIControlStateNormal];
+    UIGraphicsEndImageContext();
     [_playslider setThumbImage:IMG_NAME(@"thumbimg.png") forState:UIControlStateNormal];
     [_playslider setThumbImage:IMG_NAME(@"thumbimg_H.png")forState:UIControlStateHighlighted];
     _playslider.minimumValue = 0.f;
@@ -47,6 +52,12 @@
     [_playslider addTarget:self action:@selector(_plysliderMove:) forControlEvents:UIControlEventValueChanged];
     [_playslider addTarget:self action:@selector(_plysliderMoveEnd:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_playslider];
+    // 缓冲条
+    _bufferprogress = [[UIProgressView alloc] initWithFrame:_playslider.frame];
+    _bufferprogress.center = _playslider.center;
+    _bufferprogress.progressTintColor = [UIColor blueColor];
+    _bufferprogress.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [self insertSubview:_bufferprogress belowSubview:_playslider];
     // playbtn
     _Play_PauseBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     _Play_PauseBtn.tintColor = [UIColor whiteColor];

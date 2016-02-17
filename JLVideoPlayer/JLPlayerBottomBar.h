@@ -32,5 +32,7 @@ typedef NS_ENUM(NSInteger,PlaySilderMoveStutas){
 @property (nonatomic,strong) UILabel *timelable_l;
 // totaltime
 @property (nonatomic,strong) UILabel *timelable_r;
+// 缓冲进度条
+@property (nonatomic,strong) UIProgressView *bufferprogress;
 -(instancetype)initBottomBarWithFrame:(CGRect)frame;
 @end

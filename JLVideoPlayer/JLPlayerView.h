@@ -13,7 +13,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 #define PlayFullScreenNotifaction @"PlayFullScreenNotifaction"
-#define BottomBar_Height 64.f
+#define BottomBar_Height 44.f
 #define TopBar_Height 44.f
 typedef NS_ENUM(NSInteger,PlayerVideoMode){
      //原始比例

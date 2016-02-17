@@ -70,8 +70,7 @@
 }
 -(CGFloat)totaltime
 {
-    CMTime Time = _playeritem.duration;
-    return (CGFloat)Time.value/Time.timescale;
+    return CMTimeGetSeconds(_playeritem.duration);
 }
 -(void)setShowBottombar:(BOOL)showBottombar{
     _showBottombar = showBottombar;
@@ -114,6 +113,7 @@
     self.player = [AVPlayer playerWithPlayerItem:_playeritem];
     [self.playerlayer setPlayer:_player];
     [self.player.currentItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
+    [self.player.currentItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
     [self _updateSlider];
     [self addNotification];
 }
@@ -131,6 +131,15 @@
     [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:dispatch_get_global_queue(0, 0) usingBlock:^(CMTime time) {
         CMTime currenttime = WE_SELF.player.currentItem.currentTime;
         CGFloat currtime = (CGFloat)currenttime.value/currenttime.timescale;
+//        // 缓冲
+//       NSArray *TimeValues = WE_SELF.player.currentItem.loadedTimeRanges;
+//        NSValue *value = TimeValues[0];
+//        CMTimeRange timerange = [value CMTimeRangeValue] ;
+//        NSString * (^CMTimeBlock) (CMTime a);
+//        CMTimeBlock =  ^(CMTime a){
+//                        return [NSString stringWithFormat:@"%lld",a.value/a.timescale];
+//        };
+//        NSLog(@"____%@,%@",CMTimeBlock(timerange.duration),CMTimeBlock(timerange.start));
         dispatch_async(dispatch_get_main_queue(), ^{
             [slider setValue:currtime/WE_SELF.totaltime animated:YES];
             [WE_SELF.bottombar.timelable_l setText:[WE_SELF _TimetoStringWith:currtime]];
@@ -207,6 +216,7 @@
 {
     [self.playeritem removeObserver:self forKeyPath:@"status"];
     [self removeObserver:self forKeyPath:@"frame"];
+    [self.playeritem removeObserver:self forKeyPath:@"loadedTimeRanges"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 #pragma mark - KVO
@@ -216,11 +226,19 @@
         if (AVPlayerItemStatusReadyToPlay == _player.currentItem.status){            [_bottombar.timelable_r setText:[self _TimetoStringWith:self.totaltime]];
             }
     }
+    if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
+       CMTimeRange range = [[self.player.currentItem.loadedTimeRanges firstObject] CMTimeRangeValue];
+        // 缓冲时长
+       CGFloat progesstime = CMTimeGetSeconds(range.start) + CMTimeGetSeconds(range.duration);
+        // 更新缓冲进度条
+        [self.bottombar.bufferprogress setProgress:progesstime/self.totaltime];
+    }
     if ([keyPath isEqualToString:@"frame"]) {
         [_topbar setFrame:CGRectMake(0, 0, self.frame.size.width, TopBar_Height)];
         [_bottombar setFrame:CGRectMake(0, self.frame.size.height - BottomBar_Height, self.frame.size.width, BottomBar_Height)];
     }
 }
+
 - (NSString *)_TimetoStringWith:(CGFloat)time
 {
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
@@ -298,7 +316,6 @@
     CGSize size = [UIScreen mainScreen].bounds.size;
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     [UIView animateWithDuration:0.3 animations:^{
-//        [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight];
         [[UIApplication sharedApplication].keyWindow addSubview:self];
         [self setFrame:CGRectMake(0, 0, size.height, size.width)];
         self.transform = CGAffineTransformMakeRotation(M_PI_2);
