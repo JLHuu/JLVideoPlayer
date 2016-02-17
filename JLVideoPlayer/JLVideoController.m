@@ -17,6 +17,7 @@
 {
     CGFloat ScreenWidth;
     CGFloat ScreeHeight;
+    BOOL _isfullscreen;
 }
 -(instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,6 +42,12 @@
     JLPlayerView *playview = [[JLPlayerView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreeHeight)];
     self.view = playview;
 }
+#pragma mark - 隐藏状态栏
+-(BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+#pragma mark - 旋转屏幕
 -(UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskLandscape;

@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "JLVideoController.h"
-@interface ViewController ()
+@interface ViewController ()<JLPlayerViewDelegate>
 - (IBAction)OnClick1:(UIButton *)sender;
 - (IBAction)Onclick2:(UIButton *)sender;
 
@@ -20,20 +20,34 @@
 @implementation ViewController
 {
     JLPlayerView *playview;
+    BOOL _isfullScreen;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     playview = [[JLPlayerView alloc] initWithFrame:CGRectMake(10, 10, 300, 350)];
-//    playview.cantouchchange = YES;
     [self.view addSubview:playview];
     NSURL *movieurl = nil;
         // 远程视频URL
         NSString * videoPath = @"http://hc30.aipai.com/user/855/43516855/7600978/card/28437153/card.mp4?l=c";
         movieurl = [NSURL URLWithString:videoPath];
         [playview setMovieurl:movieurl];
-//    [playview play];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_FullScreen:) name:PlayFullScreenNotifaction object:nil];
     
+}
+- (void)_FullScreen:(NSNotification *)noti
+{
+    NSDictionary *dict = noti.userInfo;
+    _isfullScreen = [dict[@"isfullscreen"] boolValue];
+    // 刷新StatusBar
+    [self setNeedsStatusBarAppearanceUpdate];
+}
+-(BOOL)prefersStatusBarHidden
+{
+    if (_isfullScreen) {
+        return YES;
+    }
+    return NO;
 }
 // 此页禁止旋转屏幕
 - (BOOL)shouldAutorotate

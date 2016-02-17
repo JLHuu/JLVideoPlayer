@@ -39,12 +39,12 @@
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        [self initUIWith:frame];
+        [self _initUIWith:frame];
         [self addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
     }
     return self;
 }
-- (void)initUIWith:(CGRect)frame
+- (void)_initUIWith:(CGRect)frame
 {
     [self setBackgroundColor:[UIColor blackColor]];
     _topbar = [[JLPlayerTopBar alloc] initTopBarWithFrame:CGRectMake(0, 0, frame.size.width, TopBar_Height)];
@@ -277,8 +277,6 @@
 {
     if (isfullscreen) {
         [self _didSelectfullscreenfinished:^(BOOL finished) {
-            // 发送全屏通知
-        [[NSNotificationCenter defaultCenter] postNotificationName:FullScreenDidSelectedNotifaction object:btn userInfo:@{@"isfullscreen":@(isfullscreen)}];
         }];
     }else{
         [self _didSelectFullScreenOrigin:^(BOOL finsihed) {
@@ -286,6 +284,8 @@
            _OriginFrame = CGRectZero;
         }];
     }
+    // 发送全屏通知
+    [[NSNotificationCenter defaultCenter] postNotificationName:PlayFullScreenNotifaction object:btn userInfo:@{@"isfullscreen":@(isfullscreen)}];
 }
 // 变为全屏
 - (void)_didSelectfullscreenfinished:(void(^)(BOOL finished)) isfinished
@@ -296,7 +296,9 @@
     _OriginFrame = self.frame;
     [self removeFromSuperview];
     CGSize size = [UIScreen mainScreen].bounds.size;
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     [UIView animateWithDuration:0.3 animations:^{
+//        [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight];
         [[UIApplication sharedApplication].keyWindow addSubview:self];
         [self setFrame:CGRectMake(0, 0, size.height, size.width)];
         self.transform = CGAffineTransformMakeRotation(M_PI_2);
