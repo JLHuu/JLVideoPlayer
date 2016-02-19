@@ -32,8 +32,6 @@ typedef NS_ENUM(NSInteger,PlayStatus){
 @class JLPlayerView;
 @protocol JLPlayerViewDelegate <NSObject>
 @optional
-// 快进、快退
-- (void)PlayerView:(JLPlayerView *)player MoviedidRunFaster:(BOOL)faster;
 // 当前播放状态
 - (void)PlayerView:(JLPlayerView *)player CurrentStutas:(PlayStatus)stasus Error:(NSError *)error;
 // 点击分享按钮
@@ -51,6 +49,10 @@ typedef NS_ENUM(NSInteger,PlayStatus){
 @property (nonatomic,assign)PlayerVideoMode VideoMode;
 // 是否可以触摸view改变声音和亮度，默认为YES
 @property (nonatomic,assign)BOOL TouchControl;
+// 顶部栏
+@property (nonatomic,strong)JLPlayerTopBar *topbar;
+// 底部控制栏
+@property (nonatomic,strong)JLPlayerBottomBar *bottombar;
 // default yes
 @property (nonatomic,assign)BOOL showTopbar;
 @property (nonatomic,assign)BOOL showBottombar;

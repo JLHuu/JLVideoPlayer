@@ -14,10 +14,6 @@
 @property (nonatomic,strong)AVPlayerItem *playeritem;
 @property (nonatomic,strong)AVURLAsset *asset;
 @property (nonatomic,strong)MPVolumeView *volumeview; // 声音调节
-// 顶部栏
-@property (nonatomic,strong)JLPlayerTopBar *topbar;
-// 底部控制栏
-@property (nonatomic,strong)JLPlayerBottomBar *bottombar;
 @end
 @implementation JLPlayerView
 {
@@ -30,6 +26,7 @@
     BOOL _leftPoint;// 触摸点位置左、右
     CGRect _OriginFrame; // 全屏点击前的frame
     UIView *video_superview;// 原始父视图
+    NSTimer *_timer; // 定时器
 }
 // 改变view底层layer,影片播放layer
 +(Class)layerClass
@@ -160,16 +157,19 @@
                 _isplaying = YES;
                 self.currentstutas = PlayStatusPlaying;
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:StutasNotifacation object:nil userInfo:@{@"playstutas":@YES}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:StutasNotifacation object:nil userInfo:@{@"playstutas":@NO}];
         }
 }
 - (void)pause
 {
     if (self.player) {
+        if (self.player.currentItem.status != AVPlayerItemStatusReadyToPlay) {
+            return;
+        }
         [self.player pause];
         _isplaying = NO;
         self.currentstutas = PlayStatusPause;
-        [[NSNotificationCenter defaultCenter] postNotificationName:StutasNotifacation object:nil userInfo:@{@"playstutas":@NO}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:StutasNotifacation object:nil userInfo:@{@"playstutas":@YES}];
     }
 }
 -(void)stopplay
@@ -179,7 +179,7 @@
         self.currentstutas = PlayStatusStop;
         [self.player seekToTime:CMTimeMake(0, 1) completionHandler:^(BOOL finished) {
             [self.player setRate:0];
-            [[NSNotificationCenter defaultCenter] postNotificationName:StutasNotifacation object:nil userInfo:@{@"playstutas":@NO}];
+            [[NSNotificationCenter defaultCenter] postNotificationName:StutasNotifacation object:nil userInfo:@{@"playstutas":@YES}];
         }];
     }
 }
@@ -431,20 +431,4 @@
     }
 }
 
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [super touchesEnded:touches withEvent:event];
-    if (!_TouchControl) {
-        return;
-    }
-    UITouch *touch = [touches anyObject];
-    CGPoint endpoint = [touch locationInView:self];
-    CGFloat _endX = endpoint.x;
-    if (_endX - _starX > Touch_Range || _endX - _starX < -Touch_Range) {// 快进or快退
-        BOOL faster = _endX - _starX > Touch_Range ? YES : NO;
-        if (self.delegate && [self.delegate respondsToSelector:@selector(PlayerView:MoviedidRunFaster:)]) {
-            [self.delegate PlayerView:self MoviedidRunFaster:faster];
-        }
-    }
-}
 @end

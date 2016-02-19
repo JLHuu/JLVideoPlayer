@@ -18,7 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
-// 再次设置需要旋转的屏幕
+// 设置需要旋转的屏幕
 - (BOOL)shouldAutorotate
 {
     return self.topViewController.shouldAutorotate;

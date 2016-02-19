@@ -40,6 +40,7 @@
     // 画一个透明图
     UIGraphicsBeginImageContextWithOptions((CGSize){ 1, 1 }, NO, 0.0f);
     UIImage *trackImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     [_playslider setMinimumTrackImage:trackImage forState:UIControlStateNormal];
     [_playslider setMaximumTrackImage:trackImage forState:UIControlStateNormal];
     UIGraphicsEndImageContext();
@@ -56,6 +57,7 @@
     _bufferprogress = [[UIProgressView alloc] initWithFrame:_playslider.frame];
     _bufferprogress.center = _playslider.center;
     _bufferprogress.progressTintColor = [UIColor blueColor];
+    _bufferprogress.trackTintColor = [UIColor grayColor];
     _bufferprogress.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self insertSubview:_bufferprogress belowSubview:_playslider];
     // playbtn
@@ -104,7 +106,7 @@
 {
     NSDictionary *dict = Noti.userInfo;
     BOOL Playbtnstutas = [dict[@"playstutas"] boolValue];
-    [_Play_PauseBtn setImage:IMG_NAME(Playbtnstutas == YES ? @"pause.png": @"play.png") forState:UIControlStateNormal];
+    [_Play_PauseBtn setImage:IMG_NAME(Playbtnstutas == NO ? @"pause.png": @"play.png") forState:UIControlStateNormal];
 }
 #pragma mark - performSEL
 - (void)_FullScreenDidSelect:(UIButton *)btn

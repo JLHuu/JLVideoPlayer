@@ -9,7 +9,7 @@
 #import "JLVideoController.h"
 #import "JLPlayerView.h"
 
-@interface JLVideoController ()
+@interface JLVideoController ()<JLPlayerViewDelegate>
 
 @end
 
@@ -33,6 +33,7 @@
     // Do any additional setup after loading the view.
     self.navigationController.hidesBarsOnTap = YES;
     JLPlayerView *playview = (JLPlayerView *)self.view;
+    playview.delegate = self;
     NSString * videoPath = @"http://hc30.aipai.com/user/855/43516855/7600978/card/28437153/card.mp4?l=c";
     playview.movieurl = [NSURL URLWithString:videoPath];
     [playview play];
@@ -42,6 +43,22 @@
     JLPlayerView *playview = [[JLPlayerView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreeHeight)];
     self.view = playview;
 }
+#pragma mark - delegate
+-(void)PlayerView:(JLPlayerView *)player CurrentStutas:(PlayStatus)stasus Error:(NSError *)error
+{
+    NSLog(@"stutas%ld",(long)stasus);
+    if (error) {
+        NSLog(@"error");
+    }
+}
+-(void)PlayerView:(JLPlayerView *)player didSelectBackbtn:(UIButton *)btn
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+-(void)PlayerView:(JLPlayerView *)player didSelectShareBtn:(UIButton *)btn
+{
+    NSLog(@"分享功能");
+}
 #pragma mark - 隐藏状态栏
 -(BOOL)prefersStatusBarHidden
 {
@@ -50,26 +67,11 @@
 #pragma mark - 旋转屏幕
 -(UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskLandscape;
+    return UIInterfaceOrientationMaskAll;
 }
 -(BOOL)shouldAutorotate
 {
     return YES;
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

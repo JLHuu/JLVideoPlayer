@@ -35,6 +35,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_FullScreen:) name:PlayFullScreenNotifaction object:nil];
     
 }
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [playview pause];
+    [super viewWillDisappear:animated];
+}
 - (void)_FullScreen:(NSNotification *)noti
 {
     NSDictionary *dict = noti.userInfo;
