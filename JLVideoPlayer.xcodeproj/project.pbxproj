@@ -15,12 +15,12 @@
 		F203C7ED1C65C80500A667C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F203C7EB1C65C80500A667C6 /* LaunchScreen.storyboard */; };
 		F203C7F81C65C80500A667C6 /* JLVideoPlayerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F203C7F71C65C80500A667C6 /* JLVideoPlayerTests.m */; };
 		F203C8031C65C80500A667C6 /* JLVideoPlayerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F203C8021C65C80500A667C6 /* JLVideoPlayerUITests.m */; };
-		F203C8121C65C8D200A667C6 /* JLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F203C8111C65C8D200A667C6 /* JLPlayerView.m */; };
-		F205460D1C7481D80053B6A6 /* IMG.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F205460C1C7481D80053B6A6 /* IMG.bundle */; };
 		F20546111C7499BC0053B6A6 /* JLRootController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20546101C7499BC0053B6A6 /* JLRootController.m */; };
 		F23C7CBA1C6F3FF000AAEC23 /* JLVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = F23C7CB91C6F3FF000AAEC23 /* JLVideoController.m */; };
-		F2F767DA1C65F0AE0034C7D6 /* JLPlayerBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F767D91C65F0AE0034C7D6 /* JLPlayerBottomBar.m */; };
-		F2F767DD1C65F0C10034C7D6 /* JLPlayerTopBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F767DC1C65F0C10034C7D6 /* JLPlayerTopBar.m */; };
+		F2D0DF1B1C77476500035D3E /* JLPlayerBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D0DF161C77476500035D3E /* JLPlayerBottomBar.m */; };
+		F2D0DF1C1C77476500035D3E /* JLPlayerTopBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D0DF181C77476500035D3E /* JLPlayerTopBar.m */; };
+		F2D0DF1D1C77476500035D3E /* JLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D0DF1A1C77476500035D3E /* JLPlayerView.m */; };
+		F2D0DF1F1C774AAD00035D3E /* IMG.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F2D0DF1E1C774AAD00035D3E /* IMG.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,17 +57,17 @@
 		F203C7FE1C65C80500A667C6 /* JLVideoPlayerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JLVideoPlayerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F203C8021C65C80500A667C6 /* JLVideoPlayerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JLVideoPlayerUITests.m; sourceTree = "<group>"; };
 		F203C8041C65C80500A667C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F203C8101C65C8D200A667C6 /* JLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLPlayerView.h; sourceTree = "<group>"; };
-		F203C8111C65C8D200A667C6 /* JLPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLPlayerView.m; sourceTree = "<group>"; };
-		F205460C1C7481D80053B6A6 /* IMG.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IMG.bundle; sourceTree = "<group>"; };
 		F205460F1C7499BC0053B6A6 /* JLRootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLRootController.h; sourceTree = "<group>"; };
 		F20546101C7499BC0053B6A6 /* JLRootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLRootController.m; sourceTree = "<group>"; };
 		F23C7CB81C6F3FF000AAEC23 /* JLVideoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLVideoController.h; sourceTree = "<group>"; };
 		F23C7CB91C6F3FF000AAEC23 /* JLVideoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLVideoController.m; sourceTree = "<group>"; };
-		F2F767D81C65F0AE0034C7D6 /* JLPlayerBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLPlayerBottomBar.h; sourceTree = "<group>"; };
-		F2F767D91C65F0AE0034C7D6 /* JLPlayerBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLPlayerBottomBar.m; sourceTree = "<group>"; };
-		F2F767DB1C65F0C10034C7D6 /* JLPlayerTopBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLPlayerTopBar.h; sourceTree = "<group>"; };
-		F2F767DC1C65F0C10034C7D6 /* JLPlayerTopBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLPlayerTopBar.m; sourceTree = "<group>"; };
+		F2D0DF151C77476500035D3E /* JLPlayerBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLPlayerBottomBar.h; sourceTree = "<group>"; };
+		F2D0DF161C77476500035D3E /* JLPlayerBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLPlayerBottomBar.m; sourceTree = "<group>"; };
+		F2D0DF171C77476500035D3E /* JLPlayerTopBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLPlayerTopBar.h; sourceTree = "<group>"; };
+		F2D0DF181C77476500035D3E /* JLPlayerTopBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLPlayerTopBar.m; sourceTree = "<group>"; };
+		F2D0DF191C77476500035D3E /* JLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLPlayerView.h; sourceTree = "<group>"; };
+		F2D0DF1A1C77476500035D3E /* JLPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLPlayerView.m; sourceTree = "<group>"; };
+		F2D0DF1E1C774AAD00035D3E /* IMG.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IMG.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,8 +118,7 @@
 		F203C7DC1C65C80500A667C6 /* JLVideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				F205460C1C7481D80053B6A6 /* IMG.bundle */,
-				F205460E1C74997E0053B6A6 /* VideoPlayer */,
+				F2D0DF141C77476500035D3E /* JLPlayer */,
 				F20546121C7499D00053B6A6 /* Other */,
 				F23C7CB81C6F3FF000AAEC23 /* JLVideoController.h */,
 				F23C7CB91C6F3FF000AAEC23 /* JLVideoController.m */,
@@ -158,19 +157,6 @@
 			path = JLVideoPlayerUITests;
 			sourceTree = "<group>";
 		};
-		F205460E1C74997E0053B6A6 /* VideoPlayer */ = {
-			isa = PBXGroup;
-			children = (
-				F203C8101C65C8D200A667C6 /* JLPlayerView.h */,
-				F203C8111C65C8D200A667C6 /* JLPlayerView.m */,
-				F2F767D81C65F0AE0034C7D6 /* JLPlayerBottomBar.h */,
-				F2F767D91C65F0AE0034C7D6 /* JLPlayerBottomBar.m */,
-				F2F767DB1C65F0C10034C7D6 /* JLPlayerTopBar.h */,
-				F2F767DC1C65F0C10034C7D6 /* JLPlayerTopBar.m */,
-			);
-			name = VideoPlayer;
-			sourceTree = "<group>";
-		};
 		F20546121C7499D00053B6A6 /* Other */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +168,20 @@
 				F203C7E41C65C80500A667C6 /* ViewController.m */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		F2D0DF141C77476500035D3E /* JLPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				F2D0DF1E1C774AAD00035D3E /* IMG.bundle */,
+				F2D0DF151C77476500035D3E /* JLPlayerBottomBar.h */,
+				F2D0DF161C77476500035D3E /* JLPlayerBottomBar.m */,
+				F2D0DF171C77476500035D3E /* JLPlayerTopBar.h */,
+				F2D0DF181C77476500035D3E /* JLPlayerTopBar.m */,
+				F2D0DF191C77476500035D3E /* JLPlayerView.h */,
+				F2D0DF1A1C77476500035D3E /* JLPlayerView.m */,
+			);
+			path = JLPlayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,7 +294,7 @@
 				F203C7ED1C65C80500A667C6 /* LaunchScreen.storyboard in Resources */,
 				F203C7EA1C65C80500A667C6 /* Assets.xcassets in Resources */,
 				F203C7E81C65C80500A667C6 /* Main.storyboard in Resources */,
-				F205460D1C7481D80053B6A6 /* IMG.bundle in Resources */,
+				F2D0DF1F1C774AAD00035D3E /* IMG.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,12 +321,12 @@
 			files = (
 				F23C7CBA1C6F3FF000AAEC23 /* JLVideoController.m in Sources */,
 				F203C7E51C65C80500A667C6 /* ViewController.m in Sources */,
-				F2F767DA1C65F0AE0034C7D6 /* JLPlayerBottomBar.m in Sources */,
 				F20546111C7499BC0053B6A6 /* JLRootController.m in Sources */,
+				F2D0DF1C1C77476500035D3E /* JLPlayerTopBar.m in Sources */,
 				F203C7E21C65C80500A667C6 /* AppDelegate.m in Sources */,
 				F203C7DF1C65C80500A667C6 /* main.m in Sources */,
-				F2F767DD1C65F0C10034C7D6 /* JLPlayerTopBar.m in Sources */,
-				F203C8121C65C8D200A667C6 /* JLPlayerView.m in Sources */,
+				F2D0DF1B1C77476500035D3E /* JLPlayerBottomBar.m in Sources */,
+				F2D0DF1D1C77476500035D3E /* JLPlayerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

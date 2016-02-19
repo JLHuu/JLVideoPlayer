@@ -26,7 +26,6 @@
     BOOL _leftPoint;// 触摸点位置左、右
     CGRect _OriginFrame; // 全屏点击前的frame
     UIView *video_superview;// 原始父视图
-    NSTimer *_timer; // 定时器
 }
 // 改变view底层layer,影片播放layer
 +(Class)layerClass
