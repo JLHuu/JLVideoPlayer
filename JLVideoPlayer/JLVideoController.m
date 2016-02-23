@@ -36,7 +36,6 @@
     playview.delegate = self;
     NSString * videoPath = @"http://hc30.aipai.com/user/855/43516855/7600978/card/28437153/card.mp4?l=c";
     playview.movieurl = [NSURL URLWithString:videoPath];
-    [playview play];
 }
 -(void)loadView
 {

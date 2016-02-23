@@ -176,11 +176,14 @@
     if (self.player) {
         _isplaying = NO;
         self.currentstutas = PlayStatusStop;
-        [self.player seekToTime:CMTimeMake(0, 1) completionHandler:^(BOOL finished) {
-            [self.player setRate:0];
-            [[NSNotificationCenter defaultCenter] postNotificationName:StutasNotifacation object:nil userInfo:@{@"playstutas":@YES}];
-        }];
-    }
+        if (self.player.currentItem.status == AVPlayerStatusReadyToPlay) {
+            [self.player seekToTime:CMTimeMake(0, 1) completionHandler:^(BOOL finished) {
+            }];
+         }else{
+            [self.player pause];
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:StutasNotifacation object:nil userInfo:@{@"playstutas":@YES}];
+        }
 }
 #pragma mark - GestureRecognizerDelegate
 // 解决手势冲突
