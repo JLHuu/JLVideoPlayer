@@ -40,6 +40,7 @@
 -(void)loadView
 {
     JLPlayerView *playview = [[JLPlayerView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreeHeight)];
+    playview.showFullScreenBtn = NO;
     self.view = playview;
 }
 #pragma mark - delegate

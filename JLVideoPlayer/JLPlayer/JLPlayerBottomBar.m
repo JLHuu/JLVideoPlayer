@@ -10,12 +10,6 @@
 #import "JLPlayerBottomBar.h"
 
 @interface JLPlayerBottomBar()
-// 播放进度条
-@property (nonatomic,strong) UISlider *playslider;
-// 全屏点击按钮
-@property (nonatomic,strong) UIButton *fullScreenBtn;
-// 播放暂定按钮
-@property (nonatomic,strong) UIButton *Play_PauseBtn;
 @end
 @implementation JLPlayerBottomBar
 {

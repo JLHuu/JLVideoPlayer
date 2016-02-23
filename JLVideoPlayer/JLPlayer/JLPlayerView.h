@@ -56,6 +56,8 @@ typedef NS_ENUM(NSInteger,PlayStatus){
 // default yes
 @property (nonatomic,assign)BOOL showTopbar;
 @property (nonatomic,assign)BOOL showBottombar;
+// 在ViewController中设置全屏的话，将全屏按钮去掉，否者点击全屏会出现UI问题
+@property (nonatomic,assign)BOOL showFullScreenBtn;
 // 当前播放状态
 @property (nonatomic,assign)PlayStatus currentstutas;
 @property (nonatomic,readonly)CGFloat totaltime;// 总时长
@@ -65,4 +67,5 @@ typedef NS_ENUM(NSInteger,PlayStatus){
 - (void)pause;
 // 停止
 - (void)stopplay;
+
 @end

@@ -77,6 +77,11 @@
     _showTopbar = showTopbar;
     _topbar.hidden = !_showTopbar;
 }
+-(void)setShowFullScreenBtn:(BOOL)showFullScreenBtn
+{
+    _showFullScreenBtn = showFullScreenBtn;
+    _bottombar.fullScreenBtn.hidden = !_showFullScreenBtn;
+}
 -(void)setCurrentstutas:(PlayStatus)currentstutas
 {
     _currentstutas = currentstutas;
