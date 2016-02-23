@@ -5,6 +5,7 @@
 //  Created by hujiele on 16/2/6.
 //  Copyright © 2016年 JLHuu. All rights reserved.
 //
+#define SC_WIDTH [UIScreen mainScreen].bounds.size.width
 
 #import "ViewController.h"
 #import "JLVideoController.h"
@@ -25,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    playview = [[JLPlayerView alloc] initWithFrame:CGRectMake(10, 10, 300, 350)];
+    playview = [[JLPlayerView alloc] initWithFrame:CGRectMake(10, 20, SC_WIDTH-20, 350)];
     [self.view addSubview:playview];
     NSURL *movieurl = nil;
         // 远程视频URL

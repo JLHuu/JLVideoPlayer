@@ -37,11 +37,11 @@
     playview.movieurl = [NSURL URLWithString:videoPath];
 }
 // 自动旋转为横屏模式
--(void)viewWillAppear:(BOOL)animated
+-(void)viewDidAppear:(BOOL)animated
 {
     NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
     [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
 }
 
 -(void)loadView
