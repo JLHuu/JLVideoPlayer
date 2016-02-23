@@ -31,12 +31,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationController.hidesBarsOnTap = YES;
     JLPlayerView *playview = (JLPlayerView *)self.view;
     playview.delegate = self;
     NSString * videoPath = @"http://hc30.aipai.com/user/855/43516855/7600978/card/28437153/card.mp4?l=c";
     playview.movieurl = [NSURL URLWithString:videoPath];
 }
+// 自动旋转为横屏模式
+-(void)viewWillAppear:(BOOL)animated
+{
+    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    [super viewWillAppear:animated];
+}
+
 -(void)loadView
 {
     JLPlayerView *playview = [[JLPlayerView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreeHeight)];
@@ -53,6 +60,9 @@
 }
 -(void)PlayerView:(JLPlayerView *)player didSelectBackbtn:(UIButton *)btn
 {
+    // 手动设置屏幕旋转自正常
+    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)PlayerView:(JLPlayerView *)player didSelectShareBtn:(UIButton *)btn
