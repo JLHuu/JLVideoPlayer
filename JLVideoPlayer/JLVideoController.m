@@ -39,7 +39,7 @@
 // 自动旋转为横屏模式
 -(void)viewDidAppear:(BOOL)animated
 {
-    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
     [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
     [super viewDidAppear:animated];
 }

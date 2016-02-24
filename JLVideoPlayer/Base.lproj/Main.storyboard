@@ -18,33 +18,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fYp-Qj-EwN">
-                                <rect key="frame" x="26" y="440" width="52" height="30"/>
+                                <rect key="frame" x="29" y="440" width="46" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Button1"/>
+                                <state key="normal" title="Mode1"/>
                                 <connections>
                                     <action selector="OnClick1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fsW-nW-GQY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UYt-qG-0MY">
-                                <rect key="frame" x="231" y="440" width="55" height="30"/>
+                                <rect key="frame" x="235" y="440" width="48" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Button3"/>
+                                <state key="normal" title="Mode3"/>
                                 <connections>
                                     <action selector="Onclick3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NgP-mA-Udl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7VG-h0-32b">
-                                <rect key="frame" x="133" y="440" width="55" height="30"/>
+                                <rect key="frame" x="137" y="440" width="48" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Button2"/>
+                                <state key="normal" title="Mode2"/>
                                 <connections>
                                     <action selector="Onclick2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s07-e6-uSF"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gkt-n1-FnR">
-                                <rect key="frame" x="142" y="532" width="46" height="30"/>
+                                <rect key="frame" x="146" y="532" width="39" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="NEXT"/>
                                 <connections>
                                     <action selector="Present:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X6Z-AU-8CX"/>
                                 </connections>
